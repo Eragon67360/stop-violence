@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0edf4"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".Localisation">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#926aa6"
+        android:minHeight="?attr/actionBarSize"
+        android:paddingStart="50sp"
+        android:theme="?attr/actionBarTheme"
+        app:title="Stop'Violence"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry" />
+
+    <ImageButton
+        android:id="@+id/sender_button_112"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:contentDescription="@string/todo"
+        android:gravity="center"
+        android:text="@string/_112"
+        app:backgroundTint="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar"
+        app:srcCompat="@drawable/font_button_112" />
+
+    <Button
+
+        android:id="@+id/sender_button_danger"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="148dp"
+        android:background="@drawable/button_danger"
+        android:contentDescription="@string/todo"
+        android:text="DANGER"
+        android:textColor="#f0edf4"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:backgroundTint="#926aa6"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/sender_button_112" />
+
+    <TextView
+        android:id="@+id/sender_textview_adresse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sender_button_danger" />
+
+    <Button
+        android:id="@+id/sender_button_map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/carte"
+        android:textColor="#f0edf4"
+        android:textStyle="bold"
+        app:backgroundTint="#926aa6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

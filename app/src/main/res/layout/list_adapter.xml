@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="100">
+
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_baseline_person_24_grey"
+        />
+    <TextView
+        android:gravity="center"
+        android:textAlignment="center"
+        android:text="@string/textview1"
+        android:textColor="#C0C0C0"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/adapter_textview_name"
+        android:layout_weight="60"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="30">
+
+        <TextView
+            android:gravity="center"
+            android:text="@string/textview2"
+            android:textColor="#C0C0C0"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/adapter_textview_phone"/>
+    </LinearLayout>
+
+</LinearLayout>

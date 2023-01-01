@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/font_connexion"
+    tools:context=".Accueil">
+
+
+    <EditText
+        android:id="@+id/accueil_edittext_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_bg_white"
+        android:drawableStart="@drawable/ic_baseline_person_24"
+        android:hint="@string/exemple_email_com"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="#808080"
+        android:textColorHint="#C0C0C0"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.615"
+        app:layout_constraintWidth_percent=".8" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="3dp"
+        android:text="@string/e_mail"
+        android:textColor="#926aa6"
+
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/accueil_edittext_name"
+        app:layout_constraintStart_toStartOf="@+id/accueil_edittext_name" />
+
+    <EditText
+        android:id="@+id/accueil_edittext_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/edit_text_bg_white"
+        android:drawableStart="@drawable/ic_baseline_lock_24"
+        android:hint="@string/min_6_caract_res"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="#808080"
+        android:textColorHint="#C0C0C0"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accueil_edittext_name"
+        app:layout_constraintVertical_bias=".0"
+        app:layout_constraintWidth_percent=".8" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="3dp"
+        android:text="@string/mot_de_passe"
+        android:textColor="#926aa6"
+
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/accueil_edittext_password"
+        app:layout_constraintStart_toStartOf="@+id/accueil_edittext_password" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/se_connecter"
+        android:textColor="#926aa6"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accueil_edittext_password" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/accueil_button_connexion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="25dp"
+        android:layout_toEndOf="@+id/textView"
+        android:backgroundTint="#926aa6"
+        android:elevation="0dp"
+        android:foregroundGravity="center"
+        android:src="@drawable/forward"
+        android:tint="@android:color/black"
+        app:elevation="10dp"
+        app:fabCustomSize="70dp"
+        app:layout_constraintEnd_toEndOf="@+id/accueil_edittext_password"
+        app:layout_constraintTop_toBottomOf="@+id/accueil_edittext_password" />
+
+    <Button
+        android:id="@+id/accueil_button_s_inscrire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:background="@android:color/transparent"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/cr_er_un_compte"
+        android:textColor="#926aa6"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintVertical_bias=".0" />
+
+    <Button
+        android:id="@+id/accueil_button_oubli"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:background="@android:color/transparent"
+        android:paddingEnd="10dp"
+        android:text="Mot de passe oublié"
+        android:textColor="#926aa6"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
