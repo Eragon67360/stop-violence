@@ -1,0 +1,100 @@
+<!doctype html>
+<!-- Stop'Violence hover loop (8s, 1280x800).
+     Frame 0 is the portfolio card screenshot (captures/card.png) placed as the card shows it
+     (object-fit: cover, top). The zoomed home screen is the app's own background drawable
+     (res/drawable/font_accueil.jpeg), aligned on the DANGER button of the screenshot.
+     The press follows res/layout/activity_localisation.xml and Localisation.java:
+     DANGER sends the SMS to the trusted contacts and shows the "SMS sent." toast. -->
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="base.css" />
+<style>
+  @font-face { font-family: Roboto; src: url("captures/Roboto-Regular.woff2") format("woff2"); }
+  :root { --purple: #926aa6; --screen: #f0edf4; }
+  .cam { position: absolute; left: 0; top: 0; width: 1280px; height: 800px; transform-origin: 0 0; }
+  /* Card screenshot, object-fit: cover at 800px height, centred horizontally. */
+  #card { position: absolute; left: -70.82px; top: 0; width: 1421.65px; height: 800px; }
+  /* Phone screen of the centre device, in stage coordinates. */
+  #screen { position: absolute; left: 500.4px; top: 118.9px; width: 277.9px; height: 573.8px;
+    overflow: hidden; border-radius: 16px; }
+  #home { position: absolute; left: -5.43px; top: -28.92px; width: 285.67px; height: 601.75px; }
+  /* DANGER button: 180dp circle, #926aa6, centred on the one in the drawable. */
+  #btn { position: absolute; width: 177.04px; height: 171.87px; left: 48.5px; top: 237.17px;
+    border-radius: 50%; overflow: hidden; }
+  #ripple { position: absolute; left: 0; top: 0; width: 20px; height: 20px; border-radius: 50%;
+    background: rgba(255, 255, 255, .28); }
+  #pressed { position: absolute; inset: 0; background: rgba(255, 255, 255, .12); }
+  #toast { position: absolute; left: 50%; top: 452px; transform: translateX(-50%);
+    font: 12.5px/1 Roboto, sans-serif; color: #fff; background: rgba(40, 40, 40, .92);
+    padding: 9px 16px; border-radius: 16px; white-space: nowrap; }
+  #tap { position: absolute; left: 0; top: 0; width: 36px; height: 36px; margin: -18px 0 0 -18px;
+    border-radius: 50%; background: rgba(255, 255, 255, .55); box-shadow: 0 0 0 2px rgba(90, 60, 110, .35); }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="cam" id="cam">
+    <img id="card" src="captures/card.png" />
+    <div id="screen">
+      <img id="home" src="../app/src/main/res/drawable/font_accueil.jpeg" />
+      <div id="btn"><div id="pressed"></div><div id="ripple"></div></div>
+      <div id="toast">SMS sent.</div>
+      <div id="tap"></div>
+    </div>
+  </div>
+</div>
+<script src="engine.js"></script>
+<script>
+  const { tw, seg, keys, ease } = HV;
+  const $ = (id) => document.getElementById(id);
+
+  // Camera keyframes: [t, zoom, focusX, focusY] in stage coordinates (focus lands at the centre).
+  // Zoom 1 with focus (640, 400) is the untouched card frame.
+  const CAM = [
+    [0.45, 1, 640, 400],
+    [1.9, 1.7, 638, 470],   // centre phone, DANGER button
+    [4.35, 1.72, 638, 470],
+    [5.55, 1.72, 905, 340], // contacts screen on the right
+    [6.35, 1.78, 905, 336],
+    [7.55, 1, 640, 400],
+  ];
+  const cam = (t) => {
+    const z = keys(t, CAM.map((k) => [k[0], k[1]]));
+    const fx = keys(t, CAM.map((k) => [k[0], k[2]]));
+    const fy = keys(t, CAM.map((k) => [k[0], k[3]]));
+    // Focus (640, 400) at zoom 1 is the identity, i.e. exactly the card frame.
+    return { z, tx: 640 - fx * z, ty: 400 - fy * z };
+  };
+
+  const TAP = 2.35, UP = 2.7; // finger down / up on DANGER
+  const BX = 137.02, BY = 323.1; // DANGER centre inside #screen
+
+  window.DURATION = 8;
+  window.renderAt = (t) => {
+    const { z, tx, ty } = cam(t);
+    $("cam").style.transform = `translate(${tx}px, ${ty}px) scale(${z})`;
+
+    // Sharp drawable over the screenshot's phone screen while zoomed in on it.
+    $("screen").style.opacity = seg(t, 1.0, 1.35) * (1 - seg(t, 4.6, 5.1));
+
+    // Finger: appears, presses, lifts.
+    const tapVis = seg(t, TAP - 0.3, TAP - 0.1) * (1 - seg(t, UP + 0.05, UP + 0.3));
+    const tapScale = t < TAP ? 1.15 : t < UP ? 0.9 : 1;
+    $("tap").style.opacity = tapVis;
+    $("tap").style.transform = `translate(${BX + 6}px, ${BY + 10}px) scale(${tapScale})`;
+
+    // Material ripple from the touch point, then fades after release.
+    const r = tw(t, TAP, TAP + 0.3, 0, 250, ease.out);
+    const rOp = t < TAP ? 0 : 1 - seg(t, UP + 0.1, UP + 0.5);
+    $("ripple").style.opacity = rOp;
+    $("ripple").style.transform = `translate(84.5px, 86px) scale(${r / 20})`;
+    $("pressed").style.opacity = t >= TAP && t < UP + 0.15 ? 1 : 0;
+
+    // Toast "SMS sent." (Localisation.vCreateSendMessage), fades like an Android toast.
+    const to = seg(t, 2.95, 3.15) * (1 - seg(t, 4.2, 4.45));
+    $("toast").style.opacity = to;
+  };
+</script>
+</body>
+</html>
